@@ -1,0 +1,7 @@
+PyTorch Version:  1.10.0
+Torchvision Version:  0.10.0a0
+Params to learn:
+	 fc.weight
+	 fc.bias
+Epoch 0/14
+----------

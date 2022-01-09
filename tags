@@ -1,0 +1,69 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Full_Conv_ResNet	full_conv_Res18.py	/^class Full_Conv_ResNet(models.ResNet):$/;"	c
+Full_Conv_ResNet	no_contour_full_conv.py	/^class Full_Conv_ResNet(models.ResNet):$/;"	c
+__init__	full_conv_Res18.py	/^    def __init__(self, kerSize, num_classes=1000, pretrained=False, **kwargs):$/;"	m	class:Full_Conv_ResNet
+__init__	no_contour_full_conv.py	/^    def __init__(self, poolSize, num_classes=1000, pretrained=False, **kwargs):$/;"	m	class:Full_Conv_ResNet
+_forward_impl	full_conv_Res18.py	/^    def _forward_impl(self, x):$/;"	m	class:Full_Conv_ResNet
+_forward_impl	no_contour_full_conv.py	/^    def _forward_impl(self, x):$/;"	m	class:Full_Conv_ResNet
+batch_size	wf_finetune.py	/^                                                   batch_size=batch_size,$/;"	v
+batch_size	wf_finetune.py	/^batch_size = 8$/;"	v
+data_dir	wf_finetune.py	/^data_dir = ".\/data\/small_gls_train_val\/"$/;"	v
+data_transforms	wf_finetune.py	/^data_transforms = {$/;"	v
+dataloaders_dict	wf_finetune.py	/^dataloaders_dict = {x: torch.utils.data.DataLoader(image_datasets[x],$/;"	v
+find_gpus	wf_finetune.py	/^def find_gpus(num_of_cards_needed=6):$/;"	f
+freeze01	wf_finetune.py	/^                                    freeze01=False,$/;"	v
+freeze01	wf_finetune.py	/^freeze01 = True # only update the reshaped layer params$/;"	v
+ft_hist	wf_finetune.py	/^ft_hist = [h.cpu().numpy()$/;"	v
+image	full_conv_Res18.py	/^image = cv2.cvtColor(ori_image, cv2.COLOR_BGR2RGB)$/;"	v
+image	full_conv_Res18.py	/^image = image.unsqueeze(0)  # shape: (1,3,H,W)$/;"	v
+image	full_conv_Res18.py	/^image = transform(image)  # shape: (3,H,W)$/;"	v
+image	no_contour_full_conv.py	/^image = cv2.cvtColor(ori_image, cv2.COLOR_BGR2RGB)$/;"	v
+image	no_contour_full_conv.py	/^image = image.unsqueeze(0)  # shape: (1,3,H,W)$/;"	v
+image	no_contour_full_conv.py	/^image = transform(image)  # shape: (3,H,W)$/;"	v
+image_datasets	wf_finetune.py	/^image_datasets = {x: datasets.ImageFolder( os.path.join(data_dir, x),  data_transforms[x])$/;"	v
+img	resNet18.py	/^img = Image.open(".\/boat\/boat.jpeg")$/;"	v
+img_t	resNet18.py	/^img_t = transform(img)$/;"	v
+in_batch	resNet18.py	/^in_batch = torch.unsqueeze(img_t, 0)$/;"	v
+initialize_model	wf_finetune.py	/^def initialize_model(model_name, num_classes, freeze01, use_pretrained=True):$/;"	f
+is_inception	wf_finetune.py	/^                            is_inception=(model_name=="inception")$/;"	v
+is_inception	wf_finetune.py	/^                            is_inception=(model_name=="inception"))$/;"	v
+label	wf_finetune.py	/^         label="Pretrained")$/;"	v
+label	wf_finetune.py	/^         label="Scratch")$/;"	v
+labels	full_conv_Res18.py	/^    labels = [line.strip() for line in f.readlines()]$/;"	v
+labels	no_contour_full_conv.py	/^    labels = [line.strip() for line in f.readlines()]$/;"	v
+labels	resNet18.py	/^    labels = [line.strip() for line in f.readlines()]$/;"	v
+loss__	wf_finetune.py	/^loss__ = nn.CrossEntropyLoss()$/;"	v
+mean	full_conv_Res18.py	/^                         mean=[0.485, 0.456, 0.406],$/;"	v
+mean	no_contour_full_conv.py	/^                         mean=[0.485, 0.456, 0.406],$/;"	v
+mean	resNet18.py	/^          mean=[0.485, 0.456, 0.406],  #  ImageNet的？$/;"	v
+model_ft	wf_finetune.py	/^model_ft = model_ft.to(myXPU)$/;"	v
+model_name	wf_finetune.py	/^model_name = "resnet"$/;"	v
+model_scratch	wf_finetune.py	/^model_scratch = model_scratch.to(myXPU)$/;"	v
+myXPU	wf_finetune.py	/^myXPU = torch.device('cuda')   # ('cuda:号数')   号数:从0到N, N是VISIBLE显卡的数量。号数默认是0 [不是显卡的真实编号]$/;"	v
+num_classes	wf_finetune.py	/^num_classes = 6$/;"	v
+num_epochs	wf_finetune.py	/^                            num_epochs=num_epochs,$/;"	v
+num_epochs	wf_finetune.py	/^num_epochs = 2$/;"	v
+num_workers	wf_finetune.py	/^                                                   num_workers=4)$/;"	v
+ori_image	full_conv_Res18.py	/^ori_image = cv2.imread('.\/human\/human.jpeg')$/;"	v
+ori_image	no_contour_full_conv.py	/^ori_image = cv2.imread('.\/human\/human2.jpeg')$/;"	v
+params_to_update	wf_finetune.py	/^    params_to_update = []$/;"	v
+params_to_update	wf_finetune.py	/^    params_to_update = model_ft.parameters()$/;"	v
+preds	resNet18.py	/^preds = resnet(in_batch)$/;"	v
+resnet	resNet18.py	/^resnet = models.resnet18(pretrained=True)$/;"	v
+sc_hist	wf_finetune.py	/^sc_hist = [h.cpu().numpy()$/;"	v
+set_parameter_requires_grad	wf_finetune.py	/^def set_parameter_requires_grad(model, freeze01):$/;"	f
+shuffle	wf_finetune.py	/^                                                   shuffle=True,$/;"	v
+std	full_conv_Res18.py	/^                         std=[0.229, 0.224, 0.225]     )$/;"	v
+std	no_contour_full_conv.py	/^                         std=[0.229, 0.224, 0.225]     )$/;"	v
+std	resNet18.py	/^          std=[0.229, 0.224, 0.225] )$/;"	v
+train_model	wf_finetune.py	/^def train_model(model, dataloaders, criterion, optimizer, num_epochs=25, is_inception=False):$/;"	f
+transform	full_conv_Res18.py	/^transform = transforms.Compose([$/;"	v
+transform	no_contour_full_conv.py	/^transform = transforms.Compose([$/;"	v
+transform	resNet18.py	/^transform = transforms.Compose($/;"	v
+use_pretrained	wf_finetune.py	/^                                        use_pretrained=True)$/;"	v
+use_pretrained	wf_finetune.py	/^                                    use_pretrained=False$/;"	v
