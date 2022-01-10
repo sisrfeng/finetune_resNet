@@ -24,6 +24,19 @@ import torch
 # XPU: CPU or GPU
 myXPU = torch.device('cuda')   # ('cuda:号数')   号数:从0到N, N是VISIBLE显卡的数量。号数默认是0 [不是显卡的真实编号]
 
+#===================================保证可复现======================
+an_int = 1
+torch .manual_seed(an_int)
+torch .cuda.manual_seed_all(an_int)
+import numpy as np
+np    .random.seed(an_int)
+import random
+random.seed(an_int)
+torch .backends.cudnn.deterministic = True
+torch .backends.cudnn.benchmark = False  # cuDNN supports many algorithms to compute convolution
+                                        # autotuner runs a short benchmark and
+                                        # selects the algorithm with the best performance
+#===================================保证可复现======================
 
 import torch.nn as nn
 import torch.optim as optim
@@ -33,12 +46,9 @@ from torchvision import datasets, models, transforms
 import matplotlib.pyplot as plt
 import time
 import copy
-print("PyTorch Version: ",torch.__version__)
-print("Torchvision Version: ",torchvision.__version__)
 
 
 # the format of the directory 需要conforms to the ImageFolder structure
-# data_dir = "./data/small_gls_train_val/"
 data_dir = "./data/gls_train_val/"
 #  data_dir = "./data/hymenoptera_data/"
 
@@ -280,33 +290,12 @@ model_ft, hist = train_model(model_ft,
                             is_inception=(model_name=="inception")
                             )
 
-# from scratch  vs  finetune
-# Initialize the non-pretrained version of the model used for this run
-model_scratch, _ = initialize_model(model_name,
-                                    num_classes,
-                                    freeze01=False,
-                                    use_pretrained=False
-                                    )
-
-model_scratch = model_scratch.to(myXPU)
-_,scratch_hist = train_model(model_scratch,
-                            dataloaders_dict,
-                            loss__,
-                            optim.SGD(model_scratch.parameters(), lr=0.001, momentum=0.9),
-                            # num_epochs=num_epochs,
-                            num_epochs=num_epochs,
-                            is_inception=(model_name=="inception"))
 
 # Plot the training curves of validation accuracy vs. number
-#  of training epochs for
-# the transfer learning method
-# v.s.
-# the model trained from scratch
+#  of training epochs
 
 ft_hist = [h.cpu().numpy()
          for h in hist]
-sc_hist = [h.cpu().numpy()
-         for h in scratch_hist]
 
 plt.title("Validation Accuracy vs. Training Epochs")
 plt.xlabel("Training Epochs")
@@ -314,12 +303,12 @@ plt.ylabel("Validation Accuracy")
 plt.plot(range(1,num_epochs+1),
          ft_hist,
          label="Pretrained")
-plt.plot(range(1,num_epochs+1),
-         sc_hist,
-         label="Scratch")
 
 plt.ylim((0,1.))
 plt.xticks(np.arange(1, num_epochs+1, 1.0))
 plt.legend()
 # plt.show()
-plt.savefig('./out/fig.png')
+__name__
+import sys
+
+plt.savefig(f"./out/{sys.argv[0].split('.')[0]}fig.png")

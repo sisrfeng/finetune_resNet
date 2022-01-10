@@ -24,6 +24,19 @@ import torch
 # XPU: CPU or GPU
 myXPU = torch.device('cuda')   # ('cuda:号数')   号数:从0到N, N是VISIBLE显卡的数量。号数默认是0 [不是显卡的真实编号]
 
+#===================================保证可复现======================
+an_int = 1
+torch .manual_seed(an_int)
+torch .cuda.manual_seed_all(an_int)
+import numpy as np
+np    .random.seed(an_int)
+import random
+random.seed(an_int)
+torch .backends.cudnn.deterministic = True
+torch .backends.cudnn.benchmark = False  # cuDNN supports many algorithms to compute convolution
+                                        # autotuner runs a short benchmark and
+                                        # selects the algorithm with the best performance
+#===================================保证可复现======================
 
 import torch.nn as nn
 import torch.optim as optim
@@ -36,7 +49,6 @@ import copy
 
 
 # the format of the directory 需要conforms to the ImageFolder structure
-# data_dir = "./data/small_gls_train_val/"
 data_dir = "./data/gls_train_val/"
 #  data_dir = "./data/hymenoptera_data/"
 
@@ -156,7 +168,6 @@ def initialize_model(model_name, num_classes, freeze01, use_pretrained=True):
         set_parameter_requires_grad(model_ft, freeze01)
         num_ftrs = model_ft.fc.in_features
         model_ft.fc = nn.Linear(num_ftrs, num_classes)
-        #  input_size = 224
         input_size = 1792
 
     elif model_name == "alexnet":
