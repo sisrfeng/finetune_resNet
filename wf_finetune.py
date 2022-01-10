@@ -18,7 +18,6 @@ def find_gpus(num_of_cards_needed=6):
         print('{}号: {} MB free'.format(*pair) )
     return usingGPUs
 
-
 os.environ['CUDA_VISIBLE_DEVICES'] = find_gpus(1)  # 必须在import torch前面
 import torch
 # XPU: CPU or GPU
@@ -48,25 +47,34 @@ import time
 import copy
 
 
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('--data')
+parser.add_argument('--classes', default=6, type=int)
+parser.add_argument('--input_size', default=224,type=int)
+parser.add_argument('--batch_size', default=16, type=int)
+args = parser.parse_args()
+
+
 # the format of the directory 需要conforms to the ImageFolder structure
-data_dir = "./data/gls_train_val/"
-#  data_dir = "./data/hymenoptera_data/"
+# data_dir = "./data/gls_train_val/"
+data_dir = args.data
 
 # Models to choose from [resnet, alexnet, vgg, squeezenet, densenet, inception]
 model_name = "resnet"
 
-# Number of classes in the dataset
-num_classes = 6
+num_classes = args.classes
 
 # Batch size for training (change depending on how much memory you have)
-batch_size = 16
+batch_size = args.batch_size
 
 # Number of epochs to train for
 # num_epochs = 15
-num_epochs = 20
+# num_epochs = 20
+num_epochs = 2
 
 freeze01 = True # only update the reshaped layer params
-# When False, we finetune the whole model,
+# When False, we finetune the whole model
 
 
 def train_model(model, dataloaders, criterion, optimizer, num_epochs=25, is_inception=False):
@@ -232,6 +240,7 @@ model_ft, input_size = initialize_model(model_name,
                                         freeze01,
                                         use_pretrained=True)
 
+input_size = args.input_size # 改掉上面的input_size
 # print(model_ft)
 
 
@@ -311,4 +320,4 @@ plt.legend()
 __name__
 import sys
 
-plt.savefig(f"./out/{sys.argv[0].split('.')[0]}fig.png")
+plt.savefig(f"./out/{'_'.join(sys.argv[1:])}_fig.png")
